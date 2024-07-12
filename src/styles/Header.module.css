@@ -55,9 +55,3 @@
 .nav button:hover::after {
   width: 100%;
 }
-
-@media (width > 600px) {
-  .btn_logout {
-    width: 68px;
-  }
-}
