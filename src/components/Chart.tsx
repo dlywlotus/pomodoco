@@ -10,7 +10,7 @@ type props = {
 };
 
 export default function Chart({ currentWeek, prevWeek }: props) {
-  const [unitOfTime, setUnitOfTime] = useState<"hours" | "minutes">("hours");
+  const [unitOfTime, setUnitOfTime] = useState<"hours" | "minutes">("minutes");
   const [isShowChart, setIsShowChart] = useState(false);
   const [activeWeek, setActiveWeek] = useState("currentWeek");
 

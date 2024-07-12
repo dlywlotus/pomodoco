@@ -47,5 +47,3 @@ export default forwardRef(function Dashboard(
     </div>
   );
 });
-
-//DELETE THIS LATER

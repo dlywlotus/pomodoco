@@ -78,6 +78,7 @@ const CustomNumberPicker = ({
   };
 
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (durations[type] <= 1) return;
     const change = (e.target as HTMLElement).closest("button")?.dataset.id;
     if (change === "increase")
       setDurations({ ...durations, [type]: durations[type] + 1 });
