@@ -1,0 +1,19 @@
+.backdrop {
+  background-color: var(--clr-primary-700);
+  position: fixed;
+  inset: 0 0 0 0;
+  display: grid;
+  place-items: center;
+}
+
+.auth_modal {
+  width: min(900px, 80vw);
+  height: 500px;
+  display: flex;
+}
+
+@media (width < 765px) {
+  .auth_modal {
+    width: min(500px, 90vw);
+  }
+}

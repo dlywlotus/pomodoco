@@ -1,0 +1,33 @@
+.custom_slider {
+  width: 200px;
+}
+
+.custom_slider .rc-slider-rail {
+  height: 6px;
+  background-color: var(--clr-accent-400);
+}
+
+.custom_slider .rc-slider-track {
+  height: 6px;
+  background-color: var(--clr-primary-700);
+}
+
+.custom_slider .rc-slider-handle {
+  border-color: var(--clr-primary-700);
+  background-color: var(--clr-primary-700);
+  opacity: 1;
+  border: none;
+  height: 18px;
+  width: 18px;
+  margin-top: -6px;
+}
+
+.custom_slider .rc-slider-handle:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.custom_slider .rc-slider-handle-dragging {
+  box-shadow: none !important;
+  border: none !important;
+}

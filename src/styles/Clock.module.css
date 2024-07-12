@@ -1,0 +1,13 @@
+.clock {
+  font-size: 7rem;
+  line-height: 1;
+  user-select: none;
+  font-family: var(--ff-clock);
+  color: var(--clr-primary-700);
+  font-weight: var(--fw-black);
+  display: flex;
+}
+
+.clock span {
+  color: var(--clr-accent-400);
+}

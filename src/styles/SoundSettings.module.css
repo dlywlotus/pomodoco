@@ -1,0 +1,25 @@
+.header {
+  font-size: var(--fs-600);
+  color: var(--clr-accent-400);
+  margin-bottom: 0.5rem;
+}
+
+.header i {
+  font-size: var(--fs-500);
+}
+
+.header span {
+  margin-left: 0.5rem;
+}
+
+.two_columns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.label {
+  color: var(--clr-primary-700);
+  font-size: var(--fs-500);
+}
