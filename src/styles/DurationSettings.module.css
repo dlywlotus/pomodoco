@@ -21,7 +21,7 @@
 
 .custom_input input[type="number"] {
   width: 100%;
-  background-color: hsl(0, 0%, 15%);
+  background-color: hsl(270, 3%, 16%);
   border-radius: 0.5rem;
   padding: 0.25rem 0.5rem;
   outline: none;
