@@ -25,3 +25,9 @@
     gap: 0.5rem;
   }
 }
+
+@media (width < 380px) {
+  .btn {
+    padding: 0.25rem 0.5rem;
+  }
+}

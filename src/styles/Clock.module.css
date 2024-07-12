@@ -11,3 +11,9 @@
 .clock span {
   color: var(--clr-accent-400);
 }
+
+@media (width< 380px) {
+  .clock {
+    font-size: 6rem;
+  }
+}

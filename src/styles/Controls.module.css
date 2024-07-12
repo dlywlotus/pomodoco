@@ -57,3 +57,10 @@
     font-size: var(--fs-400);
   }
 }
+
+@media (width < 380px) {
+  .btn_start {
+    padding: 0.25rem 0.5rem;
+    width: 120px;
+  }
+}
