@@ -12,6 +12,7 @@ type props = {
 export default function SelectMenu({ sound, setSound, volume }: props) {
   const [isShowDropdown, setIsShowDropdown] = useState(false);
   const audioRef = useRef<HTMLAudioElement | undefined>();
+  const nodeRef = useRef(null);
 
   const onSelectOption = (optionValue: string) => {
     setSound(optionValue);
@@ -51,8 +52,13 @@ export default function SelectMenu({ sound, setSound, volume }: props) {
         timeout={300}
         classNames='selectMenu'
         unmountOnExit
+        nodeRef={nodeRef}
       >
-        <div className={styles.select_dropdown} data-show={isShowDropdown}>
+        <div
+          className={styles.select_dropdown}
+          data-show={isShowDropdown}
+          ref={nodeRef}
+        >
           <Option value={"success"} sound={sound} onSelectOption={onSelectOption} />
           <Option value={"bell"} sound={sound} onSelectOption={onSelectOption} />
           <Option value={"arcade"} sound={sound} onSelectOption={onSelectOption} />

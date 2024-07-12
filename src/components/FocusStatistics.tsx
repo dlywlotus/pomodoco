@@ -15,8 +15,6 @@ export default function FocusStatistics({ user, currentWeek }: props) {
   const prevLogDate = dayjs(user.prev_log);
   const streak = user.prev_log ? prevLogDate.diff(user.streak_start, "day") + 1 : 0;
 
-  console.log(prevLogDate, streak);
-
   const toHoursAndMinutes = (timeInMinutes: number) => {
     const hours = Math.trunc(timeInMinutes / 60);
     const minutes = timeInMinutes % 60;

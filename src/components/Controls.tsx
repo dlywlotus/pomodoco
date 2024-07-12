@@ -63,7 +63,9 @@ export default function Controls({
           .update({ streak_start: currentDate })
           .eq("id", user.id);
         if (error1) throw new Error(`${error1.message}`);
-        setUser({ ...user, streak_start: currentDate });
+        setUser(user => {
+          return { ...user, streak_start: currentDate };
+        });
       }
 
       //update prev logged day
@@ -73,7 +75,9 @@ export default function Controls({
           .update({ prev_log: currentDate })
           .eq("id", user.id);
         if (error2) throw new Error(`${error2.message}`);
-        setUser({ ...user, prev_log: currentDate });
+        setUser(user => {
+          return { ...user, prev_log: currentDate };
+        });
       }
 
       //increment total duration
@@ -82,7 +86,9 @@ export default function Controls({
         .update({ total_time: newTotalTime })
         .eq("id", user.id);
       if (error3) throw new Error(`${error3.message}`);
-      setUser({ ...user, total_time: newTotalTime });
+      setUser(user => {
+        return { ...user, total_time: newTotalTime };
+      });
 
       //update weekly data
       const todayTotaTime = Number(currentWeek[day as keyof week]);

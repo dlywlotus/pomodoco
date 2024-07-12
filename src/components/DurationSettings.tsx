@@ -74,15 +74,17 @@ const CustomNumberPicker = ({
   setDurations,
 }: CustomNumberPickerProps) => {
   const updateDurations = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (Number(e.target.value) <= 0) return;
     setDurations({ ...durations, [type]: e.target.value });
   };
 
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (durations[type] <= 1) return;
     const change = (e.target as HTMLElement).closest("button")?.dataset.id;
     if (change === "increase")
-      setDurations({ ...durations, [type]: durations[type] + 1 });
-    else setDurations({ ...durations, [type]: durations[type] - 1 });
+      setDurations({ ...durations, [type]: Number(durations[type]) + 1 });
+    else
+      Number(durations[type]) > 1 &&
+        setDurations({ ...durations, [type]: Number(durations[type]) - 1 });
   };
 
   return (

@@ -19,7 +19,6 @@ export default function CustomVolumeSlider({ volume, setVolume, sound }: props) 
 
   const onChangeComplete = (num: number | number[]) => {
     playAudio(num as number, sound, audioRef);
-    console.log(num, volume);
   };
 
   return (
