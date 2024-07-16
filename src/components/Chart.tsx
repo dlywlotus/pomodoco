@@ -24,8 +24,11 @@ export default function Chart({ currentWeek, prevWeek }: props) {
     return day[0].toUpperCase() + day.slice(1);
   };
 
+  let numberOfActiveDays = 0;
+
   const data = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].map(day => {
     const timeInMinutes = Number(week[day as keyof week]);
+    if (timeInMinutes > 0) numberOfActiveDays++;
     return {
       name: capitalize(day),
       time: isShowChart
@@ -37,7 +40,8 @@ export default function Chart({ currentWeek, prevWeek }: props) {
   });
 
   const dailyAverage =
-    Math.round(data.reduce((acc, cur) => acc + cur.time, 0) * 10) / 70;
+    Math.round(data.reduce((acc, cur) => acc + cur.time, 0) * 10) /
+    (10 * numberOfActiveDays);
 
   const yAxisLabel = `Time (${unitOfTime === "hours" ? "hours" : "minutes"})`;
 
