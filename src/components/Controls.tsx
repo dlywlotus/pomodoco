@@ -51,6 +51,7 @@ export default function Controls({
       const date = dayjs();
       const prevLogDate = dayjs(user.prev_log);
       const currentDate = dayjs().format("YYYY-MM-DD");
+      const formattedStartOfWeek = date.startOf("isoWeek").format("YYYY-MM-DD");
       const day = date.format("ddd").toLocaleLowerCase();
       const completedDuration = Number(user?.durations[currentTimerOption]);
       const daysSincePrevLog = date.diff(prevLogDate ?? currentDate, "day");
@@ -95,7 +96,8 @@ export default function Controls({
       const { error: error4 } = await supabase
         .from("weekly_log")
         .update({ [day]: todayTotaTime + completedDuration })
-        .eq("user_id", user.id);
+        .eq("user_id", user.id)
+        .eq("first_day_date", formattedStartOfWeek);
       if (error4) throw new Error(`${error4.message}`);
       setCurrentWeek({
         ...(currentWeek as week),
