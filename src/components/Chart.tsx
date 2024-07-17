@@ -39,10 +39,10 @@ export default function Chart({ currentWeek, prevWeek }: props) {
     };
   });
 
+  const weeklyTotal = data.reduce((acc, cur) => acc + cur.time, 0) * 10;
+
   const dailyAverage =
-    Math.round(
-      (data.reduce((acc, cur) => acc + cur.time, 0) * 10) / numberOfActiveDays
-    ) / 10;
+    weeklyTotal === 0 ? 0 : Math.round(weeklyTotal / numberOfActiveDays);
 
   const yAxisLabel = `Time (${unitOfTime === "hours" ? "hours" : "minutes"})`;
 
