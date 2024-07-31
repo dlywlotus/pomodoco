@@ -113,7 +113,7 @@ export default function Controls({
     let audio = new Audio(timerSounds[user.sound]);
     audio.volume = user.volume / 100;
     audio.play();
-    updateDatabase();
+    currentTimerOption === "pomodoro" && updateDatabase();
   };
 
   const handleStartNPause = () => {

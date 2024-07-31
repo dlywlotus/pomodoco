@@ -27,7 +27,7 @@ export const SetUserContext = createContext<SetUserContextType | null>(null);
 export default function Main() {
   const [user, setUser] = useState<user>({
     id: "",
-    durations: { pomodoro: 25, shortBreak: 5, longBreak: 15 },
+    durations: { pomodoro: 25, shortBreak: 1, longBreak: 15 },
     volume: 65,
     sound: "success",
     prev_log: "2024-07-08",
