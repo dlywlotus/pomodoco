@@ -69,8 +69,26 @@ export default function Pomodoro({
           durations: { pomodoro, shortBreak, longBreak },
         });
 
-        //get weekly log data for this week
         const date = dayjs();
+        const prevLogDate = dayjs(userData?.[0].prev_log);
+        const currentDate = dayjs().format("YYYY-MM-DD");
+        const daysSincePrevLog = date.diff(prevLogDate ?? currentDate, "day");
+
+        //Reset streak if needed
+        if (daysSincePrevLog > 1) {
+          const { error: error1 } = await supabase
+            .from("users")
+            .update({ streak_start: null, prev_log: null })
+            .eq("id", userData?.[0].id);
+          if (error1) throw new Error(`${error1.message}`);
+          setUser(user => {
+            return { ...user, streak_start: null, prev_log: null };
+          });
+        }
+
+        console.log(userData?.[0]);
+
+        //get weekly log data for this week
         const startOfWeek = date.startOf("isoWeek");
         const formattedStartOfWeek = startOfWeek.format("YYYY-MM-DD");
         const formattedStartOfLastWeek = startOfWeek

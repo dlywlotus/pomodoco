@@ -13,8 +13,8 @@ export type user = {
   };
   volume: number;
   sound: string;
-  prev_log: string;
-  streak_start: string;
+  prev_log: string | null;
+  streak_start: string | null;
   total_time: number;
 };
 

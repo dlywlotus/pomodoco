@@ -58,7 +58,7 @@ export default function Controls({
       const newTotalTime = user.total_time + completedDuration;
 
       //set start of streak
-      if (user.streak_start === null || daysSincePrevLog > 1) {
+      if (user.streak_start === null) {
         const { error: error1 } = await supabase
           .from("users")
           .update({ streak_start: currentDate })

@@ -12,14 +12,10 @@ export default function FocusStatistics({ user, currentWeek }: props) {
   const today = dayjs().format("ddd").toLocaleLowerCase();
   const todayDate = dayjs().format("YYYY-MM-DD");
   const todayTimeInMinutes = Number(currentWeek[today as keyof week]);
-  const prevLogDate = dayjs(user.prev_log);
 
-  const streak =
-    user.prev_log !== todayDate
-      ? prevLogDate.diff(user.streak_start, "day") + 1
-      : todayTimeInMinutes > 0
-      ? 1
-      : 0;
+  const streak = user.streak_start
+    ? dayjs(user.prev_log).diff(user.streak_start, "day") + 1
+    : 0;
 
   const toHoursAndMinutes = (timeInMinutes: number) => {
     const hours = Math.trunc(timeInMinutes / 60);
