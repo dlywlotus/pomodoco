@@ -49,12 +49,10 @@ export default function Controls({
       if (user.id === "") return;
 
       const date = dayjs();
-      const prevLogDate = dayjs(user.prev_log);
       const currentDate = dayjs().format("YYYY-MM-DD");
       const formattedStartOfWeek = date.startOf("isoWeek").format("YYYY-MM-DD");
       const day = date.format("ddd").toLocaleLowerCase();
       const completedDuration = Number(user?.durations[currentTimerOption]);
-      const daysSincePrevLog = date.diff(prevLogDate ?? currentDate, "day");
       const newTotalTime = user.total_time + completedDuration;
 
       //set start of streak

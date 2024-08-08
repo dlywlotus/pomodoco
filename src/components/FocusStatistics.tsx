@@ -10,7 +10,6 @@ type props = {
 
 export default function FocusStatistics({ user, currentWeek }: props) {
   const today = dayjs().format("ddd").toLocaleLowerCase();
-  const todayDate = dayjs().format("YYYY-MM-DD");
   const todayTimeInMinutes = Number(currentWeek[today as keyof week]);
 
   const streak = user.streak_start
