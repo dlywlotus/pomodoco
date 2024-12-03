@@ -19,6 +19,7 @@ type props = {
   setUser: React.Dispatch<React.SetStateAction<user>>;
   currentWeek: week;
   setCurrentWeek: React.Dispatch<React.SetStateAction<week>>;
+  setPrevWeek: React.Dispatch<React.SetStateAction<week>>;
 };
 
 export default function Controls({
@@ -33,6 +34,7 @@ export default function Controls({
   intervalRef,
   currentTimerOption,
   setIsSettingsOpen,
+  setPrevWeek,
 }: props) {
   const startTimeRef = useRef<number>(0);
   const timeLeftRef = useRef<number>(0);
@@ -55,7 +57,7 @@ export default function Controls({
       const completedDuration = Number(user?.durations[currentTimerOption]);
       const newTotalTime = user.total_time + completedDuration;
 
-      //set start of streak
+      //set start of streak if there is no on going streak
       if (user.streak_start === null) {
         const { error: error1 } = await supabase
           .from("users")
@@ -114,11 +116,12 @@ export default function Controls({
     currentTimerOption === "pomodoro" && updateDatabase();
   };
 
-  const handleStartNPause = () => {
+  const handleStartNPause = async () => {
     if (isPlaying) {
       setIsPlaying(false);
       clearInterval(intervalRef.current);
     } else {
+      //start counting down
       setIsPlaying(true);
       startTimeRef.current = Date.now();
 
@@ -130,6 +133,38 @@ export default function Controls({
         timeLeftRef.current = timeLeft - timeElapsedInSeconds;
         if (timeLeftRef.current <= 0) handleTimerComplete();
       }, 10);
+
+      if (user.id === "") return;
+
+      const date = dayjs();
+      const prevLogDate = dayjs(user.prev_log);
+      const currentDate = dayjs().format("YYYY-MM-DD");
+      const daysSincePrevLog = date.diff(prevLogDate ?? currentDate, "day");
+      const startOfWeek = date.startOf("isoWeek");
+      const formattedStartOfWeek = startOfWeek.format("YYYY-MM-DD");
+
+      //Reset streak if needed
+      if (daysSincePrevLog > 1) {
+        const { error: error1 } = await supabase
+          .from("users")
+          .update({ streak_start: null, prev_log: null })
+          .eq("id", user.id);
+        if (error1) throw new Error(`${error1.message}`);
+        setUser(user => {
+          return { ...user, streak_start: null, prev_log: null };
+        });
+      }
+
+      //sync week if needed
+      if (currentWeek.first_day_date !== formattedStartOfWeek) {
+        const { data: currentWeekData, error: error4 } = await supabase
+          .from("weekly_log")
+          .insert([{ user_id: user.id, first_day_date: formattedStartOfWeek }])
+          .select();
+        if (error4) throw new Error(`${error4.message}`);
+        setPrevWeek(currentWeek);
+        setCurrentWeek(currentWeekData[0]);
+      }
     }
   };
 

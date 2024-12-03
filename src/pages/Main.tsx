@@ -68,10 +68,13 @@ export default function Main() {
         />
         <DashboardSlideDown
           user={user}
+          setUser={setUser}
           isShowDashboard={isShowDashboard}
           setIsShowDashboard={setIsShowDashboard}
           currentWeek={currentWeek}
           prevWeek={prevWeek}
+          setCurrentWeek={setCurrentWeek}
+          setPrevWeek={setPrevWeek}
         />
       </SetUserContext.Provider>
     </>

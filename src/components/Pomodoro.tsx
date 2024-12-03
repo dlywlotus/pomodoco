@@ -86,8 +86,6 @@ export default function Pomodoro({
           });
         }
 
-        console.log(userData?.[0]);
-
         //get weekly log data for this week
         const startOfWeek = date.startOf("isoWeek");
         const formattedStartOfWeek = startOfWeek.format("YYYY-MM-DD");
@@ -105,6 +103,7 @@ export default function Pomodoro({
         const thisWeek = weeklyLogData.find(
           week => week.first_day_date === formattedStartOfWeek
         );
+
         if (!thisWeek) {
           const { data: currentWeekData, error: error4 } = await supabase
             .from("weekly_log")
@@ -120,8 +119,9 @@ export default function Pomodoro({
           week => week.first_day_date === formattedStartOfLastWeek
         );
 
-        if (prevWeek) setPrevWeek(prevWeek);
-        else
+        if (prevWeek) {
+          setPrevWeek(prevWeek);
+        } else
           setPrevWeek({
             first_day_date: formattedStartOfLastWeek,
             mon: 0,
@@ -176,6 +176,7 @@ export default function Pomodoro({
             setIsSettingsOpen={setIsSettingsOpen}
             currentWeek={currentWeek}
             setCurrentWeek={setCurrentWeek}
+            setPrevWeek={setPrevWeek}
           />
         </div>
       </div>
